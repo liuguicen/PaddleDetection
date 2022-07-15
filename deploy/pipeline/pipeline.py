@@ -1065,12 +1065,14 @@ class PipePredictor(object):
 def main():
     cfg = merge_cfg(FLAGS)  # use command params to update config
     print_arguments(cfg)
-
+    cfg['REID']['model_dir'] = '/E/pretrain_model/paddle/reid_model'
+    cfg['MOT']['model_dir'] = '/E/pretrain_model/paddle/mot_ppyoloe_l_36e_pipeline'
+    cfg['MOT']['tracker_config'] = '/D/tools/PaddleDetection/deploy/pipeline/config/tracker_config.yml'
     pipeline = Pipeline(FLAGS, cfg)
     # pipeline.run()
     pipeline.run_multithreads()
 
-
+# --config deploy/pipeline/config/infer_cfg_pphuman.yml --video_dir=/E/dataset/test_video/shot_test/shot_video8 --device=gpu
 if __name__ == '__main__':
     paddle.enable_static()
 
